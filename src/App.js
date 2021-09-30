@@ -8,6 +8,7 @@ import { Alert } from "./components/Alert";
 import { Login } from "./components/Login";
 import { Signup } from "./components/Signup";
 import { Footer } from "./components/Footer";
+import { SampleNotes } from "./components/SampleNotes";
 
 function App() {
 	return (
@@ -18,8 +19,11 @@ function App() {
 					<Alert message="Notekeeper" />
 					<div className="container">
 						<Switch>
-							<Route exact path="/">
+							<Route exact path="/home">
 								<Home />
+							</Route>
+							<Route exact path="/">
+								<SampleNotes />
 							</Route>
 							<Route exact path="/about">
 								<About />

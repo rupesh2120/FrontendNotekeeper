@@ -35,7 +35,7 @@ export const Navbar = () => {
 										location.pathname === "/" ? "active" : ""
 									}`}
 									aria-current="page"
-									to="/"
+									to="/home"
 								>
 									Home
 								</Link>

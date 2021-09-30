@@ -36,7 +36,7 @@ export const Signup = () => {
 		if (json.success) {
 			//save the auth token and redirect
 			localStorage.setItem("token", json.authtoken);
-			history.push("/");
+			history.push("/home");
 		} else {
 			alert("Invalid credentials");
 		}
