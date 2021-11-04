@@ -152,11 +152,12 @@ export const SampleNotes = () => {
 				<div className="container mx-2">
 					{notes.length === 0 && "No notes to display"}
 				</div>
-				{notes.map((note) => {
-					return (
-						<NoteItem key={note._id} updateNote={updateNote} note={note} />
-					);
-				})}
+				{notes.length &&
+					notes.map((note) => {
+						return (
+							<NoteItem key={note._id} updateNote={updateNote} note={note} />
+						);
+					})}
 			</div>
 		</>
 	);

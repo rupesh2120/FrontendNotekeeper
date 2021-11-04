@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 import { NoteItem } from "./NoteItem";
+import { ListGroup } from "./ListGroup";
 import { AddNote } from "./AddNote";
 import { useHistory } from "react-router";
 
@@ -31,6 +32,28 @@ export const Notes = () => {
 			etag: currentNote.tag,
 		});
 	};
+
+	const [selectedTag, setSelectedTag] = useState("");
+
+	const tags = [
+		{
+			value: "Personal",
+			label: "Personal",
+		},
+		{
+			value: "Work",
+			label: "Work",
+		},
+	];
+
+	const handleTagSelect = (tag) => {
+		console.log(tag);
+		setSelectedTag(tag);
+	};
+
+	const filteredNotes = selectedTag
+		? notes.filter((note) => note.tag === selectedTag)
+		: notes;
 
 	const ref = useRef(null);
 	const refClose = useRef(null);
@@ -146,16 +169,40 @@ export const Notes = () => {
 					</div>
 				</div>
 			</div>
-			<div className="row my-3">
-				<h3>Your notes</h3>
-				<div className="container mx-2">
-					{notes.length === 0 && "No notes to display"}
+			<div className="row my-4">
+				<div className="col-3">
+					<h4>Select Notes based on tags</h4>
+					<ListGroup
+						tags={tags}
+						onItemSelect={handleTagSelect}
+						selectedTag={selectedTag}
+					/>
 				</div>
-				{notes.map((note) => {
-					return (
-						<NoteItem key={note._id} updateNote={updateNote} note={note} />
-					);
-				})}
+				<div className="col">
+					<div className="row">
+						<h3>Your notes</h3>
+						{/* <button
+					onClick={filterChange}
+					type="button"
+					className="btn btn-primary"
+				>
+					Personal
+				</button> */}
+						<div className="container mx-2">
+							{filteredNotes.length === 0 && "No notes to display"}
+						</div>
+						{filteredNotes.map((note) => {
+							return (
+								<NoteItem
+									key={note._id}
+									updateNote={updateNote}
+									note={note}
+									tags={tags}
+								/>
+							);
+						})}
+					</div>
+				</div>
 			</div>
 		</>
 	);
