@@ -29,7 +29,7 @@ export const Login = () => {
 		if (json.success) {
 			//save the auth token and redirect
 			localStorage.setItem("token", json.authtoken);
-			history.push("/home");
+			history.push("/");
 		} else {
 			alert("Invalid credentials");
 		}

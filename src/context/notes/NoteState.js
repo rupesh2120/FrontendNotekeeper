@@ -57,17 +57,14 @@ const NoteState = (props) => {
 	const editNote = async (id, title, description, tag) => {
 		//API Call
 
-		const response = await fetch(
-			`https://personalnotekeeper.herokuapp.com/api/notes/updatenote/${id}`,
-			{
-				method: "PUT", // *GET, POST, PUT, DELETE, etc.
-				headers: {
-					"Content-Type": "application/json",
-					"auth-token": localStorage.getItem("token"),
-				},
-				body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
-			}
-		);
+		const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
+			method: "PUT", // *GET, POST, PUT, DELETE, etc.
+			headers: {
+				"Content-Type": "application/json",
+				"auth-token": localStorage.getItem("token"),
+			},
+			body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
+		});
 		const json = response.json(); // parses JSON response into native JavaScript objects
 
 		let newNotes = JSON.parse(JSON.stringify(notes));

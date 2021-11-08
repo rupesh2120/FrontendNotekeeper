@@ -65,7 +65,7 @@ export const AddNote = () => {
 						id="description"
 						name="description"
 						value={description}
-						onChange={(e) => setTitle(e.target.value)}
+						onChange={(e) => setDescription(e.target.value)}
 						minLength={5}
 						required
 					/>
@@ -77,7 +77,7 @@ export const AddNote = () => {
 					<Select name="selectedTag" options={tagList} onChange={onChangeTag} />
 				</div>
 				<button
-					disabled={note.title.length < 5 || note.description.length < 5}
+					disabled={title.length < 5 || description.length < 5}
 					onClick={handleClick}
 					type="submit"
 					className="btn btn-primary"

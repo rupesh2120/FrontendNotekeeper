@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import noteContext from "../context/notes/noteContext";
 import { NoteItem } from "./NoteItem";
+import { ListGroup } from "./ListGroup";
 import { AddNote } from "./AddNote";
 import { useHistory } from "react-router";
 

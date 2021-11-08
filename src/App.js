@@ -16,14 +16,10 @@ function App() {
 			<NoteState>
 				<Router>
 					<Navbar />
-					<Alert message="Notekeeper" />
 					<div className="container">
 						<Switch>
-							<Route exact path="/home">
-								<Home />
-							</Route>
 							<Route exact path="/">
-								<SampleNotes />
+								<Home />
 							</Route>
 							<Route exact path="/about">
 								<About />

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
+import Select from "react-select";
 import noteContext from "../context/notes/noteContext";
 import { NoteItem } from "./NoteItem";
 import { ListGroup } from "./ListGroup";
@@ -6,12 +7,53 @@ import { AddNote } from "./AddNote";
 import { useHistory } from "react-router";
 
 export const Notes = () => {
-	const [note, setNote] = useState({
-		id: "",
-		etitle: "",
-		edescription: "",
-		etag: "default",
-	});
+	const [id, setId] = useState("");
+	const [etitle, setEtitle] = useState("");
+	const [edescription, setEdescription] = useState("");
+	const [eselectedTag, setEselectedTag] = useState("");
+
+	// let history = useHistory();
+	// const context = useContext(noteContext);
+	// const { notes, getNotes, editNote } = context;
+	// useEffect(() => {
+	// 	if (localStorage.getItem("token")) {
+	// 		getNotes();
+	// 	} else {
+	// 		history.push("/login");
+	// 	}
+	// }, []);
+
+	const updateNote = (currentNote) => {
+		ref.current.click();
+		setId(currentNote._id);
+		setEtitle(currentNote.title);
+		setEdescription(currentNote.description);
+		setEselectedTag(currentNote.tag);
+		// addNote(title, description, selectedTag);
+		// setTitle("");
+		// setDescription("");
+		// setSelectedTag("");
+		//setNote({ title: "", description: "", tag: "" });
+		//console.log(selectedTag[0]);
+	};
+
+	// const updateNote = (currentNote) => {
+	// 	ref.current.click();
+	// 	setNote({
+	// 		id: currentNote._id,
+	// 		etitle: currentNote.title,
+	// 		edescription: currentNote.description,
+	// 		etag: currentNote.tag,
+	// 	});
+	// };
+
+	// const [note, setNote] = useState({
+	// 	id: "",
+	// 	etitle: "",
+	// 	edescription: "",
+	// 	etag: "default",
+	// });
+
 	let history = useHistory();
 	const context = useContext(noteContext);
 	const { notes, getNotes, editNote } = context;
@@ -23,15 +65,15 @@ export const Notes = () => {
 		}
 	}, []);
 
-	const updateNote = (currentNote) => {
-		ref.current.click();
-		setNote({
-			id: currentNote._id,
-			etitle: currentNote.title,
-			edescription: currentNote.description,
-			etag: currentNote.tag,
-		});
-	};
+	// const updateNote = (currentNote) => {
+	// 	ref.current.click();
+	// 	setNote({
+	// 		id: currentNote._id,
+	// 		etitle: currentNote.title,
+	// 		edescription: currentNote.description,
+	// 		etag: currentNote.tag,
+	// 	});
+	// };
 
 	const [selectedTag, setSelectedTag] = useState("");
 
@@ -48,7 +90,7 @@ export const Notes = () => {
 
 	const handleTagSelect = (tag) => {
 		console.log(tag);
-		setSelectedTag(tag);
+		setEselectedTag(tag);
 	};
 
 	const filteredNotes = selectedTag
@@ -59,14 +101,18 @@ export const Notes = () => {
 	const refClose = useRef(null);
 
 	const handleClick = (e) => {
-		console.log("Updating");
-		editNote(note.id, note.etitle, note.edescription, note.etag);
+		console.log("Updating", id);
+		editNote(id, etitle, edescription, eselectedTag);
 		refClose.current.click();
 	};
 
-	const onChange = (e) => {
-		setNote({ ...note, [e.target.name]: e.target.value });
-	};
+	// const onChangeTag = (e) => {
+	// 	setSelectedTag(e.label);
+	// };
+
+	// const onChange = (e) => {
+	// 	setNote({ ...note, [e.target.name]: e.target.value });
+	// };
 
 	return (
 		<>
@@ -109,9 +155,9 @@ export const Notes = () => {
 										className="form-control"
 										id="etitle"
 										name="etitle"
-										value={note.etitle}
+										value={etitle}
 										aria-describedby="emailHelp"
-										onChange={onChange}
+										onChange={(e) => setEtitle(e.target.value)}
 										minLength={5}
 										required
 									/>
@@ -125,8 +171,8 @@ export const Notes = () => {
 										className="form-control"
 										id="edescription"
 										name="edescription"
-										value={note.edescription}
-										onChange={onChange}
+										value={edescription}
+										onChange={(e) => setEdescription(e.target.value)}
 										minLength={5}
 										required
 									/>
@@ -135,14 +181,20 @@ export const Notes = () => {
 									<label htmlFor="etag" className="form-label">
 										Tag
 									</label>
-									<input
+									<Select
+										className="form-control"
+										name="selectedTag"
+										options={tags}
+										onChange={handleTagSelect}
+									/>
+									{/* <input
 										type="text"
 										className="form-control"
 										id="etag"
 										name="etag"
-										value={note.etag}
+										value={}
 										onChange={onChange}
-									/>
+									/> */}
 								</div>
 							</form>
 						</div>
@@ -156,9 +208,7 @@ export const Notes = () => {
 								Close
 							</button>
 							<button
-								disabled={
-									note.etitle.length < 5 || note.edescription.length < 5
-								}
+								disabled={etitle.length < 5 || edescription.length < 5}
 								onClick={handleClick}
 								type="button"
 								className="btn btn-primary"
