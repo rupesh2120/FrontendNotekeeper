@@ -27,8 +27,6 @@ export const AddNote = () => {
 		setTitle("");
 		setDescription("");
 		setSelectedTag("");
-		//setNote({ title: "", description: "", tag: "" });
-		console.log(selectedTag[0]);
 	};
 
 	const onChangeTag = (e) => {

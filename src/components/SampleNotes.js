@@ -38,7 +38,6 @@ export const SampleNotes = () => {
 	const refClose = useRef(null);
 
 	const handleClick = (e) => {
-		console.log("Updating");
 		editNote(note.id, note.etitle, note.edescription, note.etag);
 		refClose.current.click();
 	};

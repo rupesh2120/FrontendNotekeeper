@@ -25,7 +25,6 @@ export const Login = () => {
 			}
 		);
 		const json = await response.json();
-		console.log(json);
 		if (json.success) {
 			//save the auth token and redirect
 			localStorage.setItem("token", json.authtoken);
@@ -48,7 +47,6 @@ export const Login = () => {
 			}
 		);
 		const json = await response.json();
-		console.log(json);
 		if (json.success) {
 			//save the auth token and redirect
 			localStorage.setItem("token", json.authtoken);

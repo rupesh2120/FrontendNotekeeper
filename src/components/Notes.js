@@ -94,7 +94,6 @@ export const Notes = () => {
 	];
 
 	const handleTagSelect = (tag) => {
-		console.log(tag);
 		setEselectedTag(tag);
 	};
 
@@ -122,7 +121,6 @@ export const Notes = () => {
 	const refClose = useRef(null);
 
 	const handleClick = (e) => {
-		console.log("Updating", id);
 		editNote(id, etitle, edescription, eselectedTag);
 		refClose.current.click();
 	};
