@@ -93,8 +93,19 @@ export const Notes = () => {
 		},
 	];
 
-	const handleTagSelect = (tag) => {
-		setEselectedTag(tag);
+	const editTags = [
+		{
+			value: "Personal",
+			label: "Personal",
+		},
+		{
+			value: "Work",
+			label: "Work",
+		},
+	];
+
+	const handleTagSelect = (e) => {
+		setEselectedTag(e.label);
 	};
 
 	const handleSelect = (tag) => {
@@ -203,7 +214,7 @@ export const Notes = () => {
 									<Select
 										className="form-control"
 										name="selectedTag"
-										options={tags}
+										options={editTags}
 										onChange={handleTagSelect}
 									/>
 									{/* <input
