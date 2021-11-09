@@ -30,8 +30,29 @@ export const Login = () => {
 			//save the auth token and redirect
 			localStorage.setItem("token", json.authtoken);
 			history.push("/");
-		} else {
-			alert("Invalid credentials");
+		}
+	};
+
+	const handleLogin = async () => {
+		const response = await fetch(
+			"https://dailynotekeeper.herokuapp.com/api/auth/login",
+			{
+				method: "POST", // *GET, POST, PUT, DELETE, etc.
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					email: "rupesh1234@gmail.com",
+					password: "scam2021",
+				}),
+			}
+		);
+		const json = await response.json();
+		console.log(json);
+		if (json.success) {
+			//save the auth token and redirect
+			localStorage.setItem("token", json.authtoken);
+			history.push("/");
 		}
 	};
 
@@ -68,8 +89,19 @@ export const Login = () => {
 						onChange={onChange}
 					/>
 				</div>
-				<button type="submit" className="btn btn-primary">
+				<button
+					disabled={credentials.email < 5 || credentials.password < 5}
+					type="submit"
+					className="btn btn-primary"
+				>
 					Login
+				</button>
+				<button
+					type="submit"
+					className="btn btn-primary mx-5"
+					onClick={handleLogin}
+				>
+					Login with Test Credentials
 				</button>
 			</form>
 		</div>

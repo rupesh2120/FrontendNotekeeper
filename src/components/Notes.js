@@ -11,6 +11,7 @@ export const Notes = () => {
 	const [etitle, setEtitle] = useState("");
 	const [edescription, setEdescription] = useState("");
 	const [eselectedTag, setEselectedTag] = useState("");
+	//const [filteredNotes, setfilteredNotes] = useState([]);
 
 	// let history = useHistory();
 	// const context = useContext(noteContext);
@@ -79,6 +80,10 @@ export const Notes = () => {
 
 	const tags = [
 		{
+			value: "All tags",
+			label: "All tags",
+		},
+		{
 			value: "Personal",
 			label: "Personal",
 		},
@@ -93,9 +98,25 @@ export const Notes = () => {
 		setEselectedTag(tag);
 	};
 
-	const filteredNotes = selectedTag
-		? notes.filter((note) => note.tag === selectedTag)
-		: notes;
+	const handleSelect = (tag) => {
+		console.log(tag);
+		setSelectedTag(tag);
+		// if (selectedTag === "All tags") {
+		// 	setfilteredNotes(notes);
+		// 	//filteredNotes = notes;
+		// } else if (selectedTag === "Personal") {
+		// 	setfilteredNotes(notes.filter((note) => note.tag === "Personal"));
+		// 	//filteredNotes = notes.filter((note) => note.tag === "Personal");
+		// } else {
+		// 	setfilteredNotes(notes.filter((note) => note.tag === "Work"));
+		// 	//filteredNotes = notes.filter((note) => note.tag === "Work");
+		// }
+	};
+
+	const filteredNotes =
+		selectedTag && selectedTag !== "All tags"
+			? notes.filter((note) => note.tag === selectedTag)
+			: notes;
 
 	const ref = useRef(null);
 	const refClose = useRef(null);
@@ -224,13 +245,13 @@ export const Notes = () => {
 					<h4>Select Notes based on tags</h4>
 					<ListGroup
 						tags={tags}
-						onItemSelect={handleTagSelect}
+						onItemSelect={handleSelect}
 						selectedTag={selectedTag}
 					/>
 				</div>
 				<div className="col">
 					<div className="row">
-						<h3>Your notes</h3>
+						<h3 className="mx-5">Your notes</h3>
 						{/* <button
 					onClick={filterChange}
 					type="button"

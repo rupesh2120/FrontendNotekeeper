@@ -6,10 +6,10 @@ export const NoteItem = (props) => {
 	const { deleteNote } = context;
 	const { note, updateNote } = props;
 	return (
-		<div className="col-md-3">
+		<div className="col-md-3 mx-5">
 			<div
 				className="card my-3"
-				style={{ width: "11rem", backgroundColor: "yellow" }}
+				style={{ width: "20rem", backgroundColor: "yellow" }}
 			>
 				<div className="card-body">
 					<div className="d-flex align-items-center">
