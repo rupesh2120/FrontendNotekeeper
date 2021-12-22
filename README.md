@@ -3,10 +3,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Deployed app link
-#### Frontend
-https://happy-payne-59e370.netlify.app
-#### Backend
-https://dailynotekeeper.herokuapp.com/
+https://personal-notekeeper.netlify.app/login
 
 ### How this project made?
 
